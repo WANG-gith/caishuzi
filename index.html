@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!--适配手机屏幕-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字小游戏</title>
+</head>
+<body style="text-align:center;font-size:20px;margin-top:50px;">
+    <h2>猜数字游戏（1~100）</h2>
+    <p>请输入你猜的数字：</p >
+    <input type="number" id="num" min="1" max="100" style="font-size:18px;padding:4px;width:150px;">
+    <br><br>
+    <button onclick="guess()" style="font-size:18px;padding:6px 16px;">提交猜测</button>
+    <p id="tip"></p >
+    <p>猜测次数：<span id="count">0</span></p >
+    <button onclick="restart()" id="resetBtn" style="display:none;font-size:18px;padding:6px 16px;">重新开始</button>
+
+<script>
+let answer = Math.floor(Math.random()*100)+1;
+let cnt = 0;
+function guess(){
+    let val = Number(document.getElementById('num').value);
+    cnt++;
+    document.getElementById('count').innerText = cnt;
+    let tipDom = document.getElementById('tip');
+    if(val > answer){
+        tipDom.innerText = "猜大了！";
+    }else if(val < answer){
+        tipDom.innerText = "猜小了！";
+    }else{
+        tipDom.innerText = `??恭喜猜对！答案就是${answer}`;
+        document.getElementById('resetBtn').style.display="block";
+    }
+}
+function restart(){
+    answer = Math.floor(Math.random()*100)+1;
+    cnt = 0;
+    document.getElementById('count').innerText = cnt;
+    document.getElementById('tip').innerText = "";
+    document.getElementById('num').value="";
+    document.getElementById('resetBtn').style.display="none";
+}
+</script>
+</body>
+</html>
+
